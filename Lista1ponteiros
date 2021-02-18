@@ -1,0 +1,344 @@
+LISTA 01 PROGRAMAÇÃO AVANÇADA, PONTEIROS. DISCENTE: ANTONIO GUSTAVO DA S. LEANDRO
+_______________________________________________________________________________________
+
+1- O ponteiro é utilizado na passagem e retorno de valores de funções, permitindo passar o endereço dos dados ao invés de uma cópia dos mesmos. Além disso, armazena
+o endereço de memória de outras variáveis, é útil na alocação dinâmica de memória e na manipulação de arrays.
+_______________________________________________________________________________________________________________________________________________________________________
+
+2- p == &i retorna 1
+   *p - *q retorna 3-5 = -2
+    **&p  retorna 3
+    3 - *p/(*q) + 7 retorna 3+7 = 10
+________________________________________________________________________________________________________________________________________________________________________    
+ 
+3-  4094; 
+     7;
+     5; 
+     15;  
+     9;
+________________________________________________________________________________________________________________________________________________________________________     
+
+4- a. Ilegal, o ponteiro p recebe o endereço de i
+   b. Certo, 
+   c. Certo
+   d. Ilegal, *& não é uma expressão e só tem valor lógico quando ligado a 
+    uma variável.
+   e. Certo
+   f. Certo
+   g. Ilegal, mesma coisa do exemplo "a"
+   h. Certo
+__________________________________________________________________________________________________________________________________________________________________________    
+
+5- a)20
+   b)29.0
+   c)p
+   d)e
+   e)p
+   f)e
+   g)t
+   h)31
+   i)45
+   j)27
+   l)31
+   m)45
+   n)27   
+____________________________________________________________________________________________________________________________________________________________________________   
+
+6- "printf("\ni = %d",i);" = valor do contador "i" dentro do laço.
+    
+   "printf("vet[%d] = %.1f",i, vet[i]);" = valor do componente "i" do vetor "vet".
+    
+   "printf("*(f + %d) = %.1f",i, *(f+i));" = valor do componente "i" do vetor "vet".
+ 
+   "printf("&vet[%d] = %X",i, &vet[i]);" = endereço do componente "i" do vetor "vet".
+
+   "printf("(f + %d) = %X",i, f+i);" =  endereço do componente "i" do vetor "vet".
+___________________________________________________________________________________________________________________________________________________________________________   
+  
+ 7- *(pulo + 2) retorna o valor do terceiro componente
+___________________________________________________________________________________________________________________________________________________________________________   
+   
+8- p = mat + 1 é válida, retorna o valor de mat somado a 1 unidade
+   p = mat é inválida, mat não é ponteiro
+   p = mat é inválida, mat não é ponteiro
+   x = (*mat) = é válida, retorna o valor de "mat[0]".
+___________________________________________________________________________________________________________________________________________________________________________      
+  
+9- O primeiro programa retorna valores inteiros que estão contidos no vetor vet;
+   O segundo programa retorna os endereços de cada elemento do vetor vet
+___________________________________________________________________________________________________________________________________________________________________________ 
+   
+10- (a)(char) x+1=4092+1=4093 
+                 x+2=4092+2=4094 
+                 x+3=4092+3=4095
+       
+       (b)(int) x+1=4094 
+                x+2=4096 
+                x+3=4098 
+       
+       (c)(float) x+1=4096 
+                  x+2=4100 
+                  x+3=4104 
+       
+       d)(double) x+1=4100 
+                  x+2=4108 
+                  x+3=4116
+_________________________________________________________________________________________________________________________________________________________________________________
+
+ 11- a) Válido
+     b) Válido
+     c) Inválido, array em um float
+     d) Válido
+     e) Válido
+     f) Inválido, tamanho inválido
+     g) Inválido, não se pode colocar valor a um ponteiro
+     h) Válido
+_________________________________________________________________________________________________________________________________________________________________________________    
+
+12-Uma função é vista como uma referência para uma área de memória na qual reside seu código e por isso, o identificador de uma função pode ser visto como um ponteiro. 
+Funções podem ser acessadas usando ponteiros, de forma similar às variáveis. Ponteiros para funções podem ser passados como argumentos para outras funções, e a função 
+apontada pode ser invocada a partir de seu ponteiro
+ 
+#include <stdio.h>
+#include <stdlib.h>
+
+int subtracao (int x, int y){
+return x - y;
+}
+int main (){
+
+int a,b,c;
+int(*p) (int, int);
+printf("digite dois numeros:");
+scanf("%d %d", &a %b);
+
+p = subtracao;
+c = p (a,b);
+printf("subtracao = %d\n", c);
+
+return 0;
+}
+______________________________________________________________________________________________________________________________________________________________________________________
+
+13- #include<stdio.h>
+#include<stdlib.h>
+int main(){
+  int *x,n,i;
+  scanf("%d",&n);
+  x = (int *)malloc(n*sizeof(int));
+  for(i=0; i<n; i++){
+     scanf("%d",(x+i));
+  }
+  for(i=0;i<n;i++){
+     printf("%d",*(x+i));
+  }
+  for(i=0;i<n;i++){
+     int aj;
+  for(int j=0;j<n;j++){
+        if(*(x+i)<*(x+j)){
+        aj=*(x+i);
+        *(x+i)=*(x+j);
+        *(x+j)=aj;
+    }
+  }
+}
+for(i=0;i<n;i++){
+   printf("%d",*(v+i));
+}
+return 0;
+}
+____________________________________________________________________________________________________________________________________________________________________________________
+
+14- #include<stdio.h>
+#include<stdlib.h>
+
+int compare(const void *a,const void *b){    //Função que vai comparar dois valores e retornar um inteiro 
+    return *(int*)a-*(int*)b;                //faz parte da funçao qsort da stdlib
+}
+int main(){
+  double tmp;
+  int *x,n,i,(*cmp)();                         // nomeando variáveis
+   cmp=compare;                               //cmp é o ponteiro para a funçao de comparação
+  scanf("%d",&n);                            //  solicitando o tamanho do vetor ao usuário 
+  x = (int *)malloc(n*sizeof(int));         // usando o conceito da alocacao dinamica
+  for(i=0;i<n;i++){                         // estrutura de repeticao para evitar loop
+     
+//scanf("%d",(x+i));                       //colocando elementos no vetor
+     *(x+i)=n-i;
+  }
+  qsort(x,n,sizeof(int),cmp);            // usando ponteiro para chamar a funcao qsort
+  for(i=0;i<n;i++){
+     printf("%d \n",*(x+i));            // comando que faz com que mostre os valores ordenados
+  }
+  free(v);  //libera o espaço ocupado pelo vetor;
+  return 0;
+}
+
+______________________________________________________________________________________________________________________________________________________________________________________
+
+15- #include<stdio.h>
+    #include<stdlib.h>
+
+int compare(int *x,int *y) 
+    return *x-*y;
+}
+void ordemVetor(int *vetor,int quantidade,int (*comparacao)(int *x,int *y)) 
+    int aux,i,j;
+    for(i=0; i<quantidade; i++)
+    {
+        for(j=0; j<quantidade; j++)
+        {
+            if(comparacao(vetor+i,vetor+j)<0) 
+            {
+                
+                aux = *(vetor+i);      
+                *(vetor+i)=*(vetor+j);
+                *(vetor+j)=aux;
+            }
+        }
+    }
+
+}
+int main()
+{
+    int *v,n,i,(*comp)();      
+    comp=compare;            
+    scanf("%d",&n);        
+    v = (int *)malloc(n*sizeof(int));
+    for(i=0; i<n; i++)
+    {
+        *(v+i)=(n-i);//scanf("%d",(v+i));  
+    }
+    ordemVetor(v,n,comp); 
+    for(i=0; i<n; i++)
+    {
+        printf("%d\n",*(v+i));
+    }
+    
+    return 0;
+}
+ 
+______________________________________________________________________________________________________________________________________________________________________________________ 
+
+16- Na maioria dos sites pesquisados, as respostas encaminham para o uso da função CLOCK para a medição do tempo pedido. Após análise dos resultados obtidos, a conclusão que se chega é que
+com o qsort nota-se um desempenho relativamente melhor. 
+_______________________________________________________________________________________________________________________________________________________________________________________
+
+17- 
+
+#include <stdio.h>
+#include <stdlib.h>
+void soma (int a[], int b[], int c[], int n){
+    int i;
+    for (i = 0; i<n; i++){
+    c[i] = (a[i] + b[i]);
+}
+    for (i = 0; i<n; i++){
+        printf("\nArray soma: %d :", i+1);
+        printf("%d", c[i]);
+    }
+
+}
+int main()
+{
+    int n, i;
+    printf("Digite o numero de elementos dos arrays: ");
+    scanf("%d", &n);
+    int a[n], b[n], c[n];
+    for (i = 0; i<n; i++){
+        printf("Array 1 : Digite o elemento %d ", i+1);
+        scanf("%d", &a[i]);
+        printf("Array 2 : Digite o elemento %d ", i+1);
+        scanf("%d", &b[i]);
+    }
+    soma(a,b,c,n);
+
+    return 0;
+}
+__________________________________________________________________________________________________________________________________________________________________________________ 
+18- int **x, **y, **z;
+    
+    int i, j, k, NL=3, NC=3, NCo=3;
+
+    x = (int **)malloc(NL*sizeof(int *));
+    x[0] = (int *)malloc(NL*NC*sizeof(int));
+    for(i=1;i<NL;i++){
+      x[i] = x[i-1]+NC;
+    }
+
+    y = (int **)malloc(NC*sizeof(int *));
+    y[0] = (int *)malloc(NL*NC*sizeof(int));
+    for(i=1;i<NC;i++){
+      y[i] = y[i-1]+NL;
+    }
+	
+    z = (int **)malloc(NL*sizeof(int *));
+    z[0] = (int *)malloc(NL*NCo*sizeof(int));
+     for(i=1;i<NL;i++){
+       z[i] = z[i-1]+NCo;
+     }
+
+
+    for(i=0;i<NL;i++){
+      for(j=0;j<NC;j++){
+        x[i][j] = rand()%10;
+        printf("%d, ", x[i][j]);
+      }
+      printf("\n");
+    }
+    printf("\n");
+
+    for(i=0;i<NL;i++){
+      for(j=0;j<NC;j++){
+        y[i][j] = rand()%10;
+        printf("%d, ", y[i][j]);
+      }
+      printf("\n");
+    }
+    printf("\n");
+
+    for(i=0;i<NL;i++){
+      for(j=0;j<NCo;j++){
+        int v = 0;
+        for(k=0;k<NC;k++){
+	  v = v + x[i][k]*y[k][j];
+	}
+	z[i][j] = v;
+       }
+     }
+
+   for(i=0;i<NL;i++){
+      for(j=0;j<NCo;j++){
+        printf("%d, ", z[i][j]);
+      }
+      printf("\n");
+    }
+    printf("\n");
+
+    free(x[0]);
+    free(x);	
+    free(y[0]);	
+    free(y);	
+    free(z[0]);	
+    free(z);	
+	
+    return 0;
+}
+   
+    
+
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
